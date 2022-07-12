@@ -1,4 +1,5 @@
 import React, {Component, Fragment, ReactNode} from 'react';
+import './title.scss';
 import Menu from './components/menu';
 import {Notifier} from './components/notifier';
 import Error from './components/error';
@@ -47,6 +48,8 @@ class App extends Component<{}, State> {
                     <a href='#!'>
                         <LogoSvg className='titleBar_logo' />
                     </a>
+                    <p id='lite'>- lite</p>
+
                 </div>
 
                 <div id='shell'>

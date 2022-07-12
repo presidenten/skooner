@@ -8,6 +8,7 @@ import MetadataFields from '../components/metadataFields';
 import Field from '../components/field';
 import api from '../services/api';
 import LogsSvg from '../art/logsSvg';
+import RestartButton from '../components/restartButton';
 import EventsPanel from '../components/eventsPanel';
 import ContainersPanel from '../components/containersPanel';
 import {objectMap} from '../components/listViewHelpers';
@@ -64,6 +65,10 @@ export default class PodView extends Base<Props, State> {
                             <LogsSvg />
                             <span className='button_label'>Logs</span>
                         </a>
+
+                        <RestartButton
+                            onRestart={() => service.delete(namespace, name)}
+                        />
                     </>
                 </ItemHeader>
 

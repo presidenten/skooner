@@ -25,6 +25,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 const BASE_HTTP_URL = isDev && hostname === 'localhost' ? 'http://localhost:4654' : nonHashedUrl;
 const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
 const JSON_HEADERS = {Accept: 'application/json', 'Content-Type': 'application/json'};
+const JSONPATCH_HEADERS = {Accept: 'application/json', 'Content-Type': 'application/merge-patch+json'};
 const PROTO_HEADERS = {Accept: 'application/vnd.kubernetes.protobuf', 'Content-Type': 'application/json'};
 
 async function requestInner(path: string, params?: any, autoLogoutOnAuthError = true, isProtobuf = false) {
@@ -89,6 +90,7 @@ export function apiFactory<T extends ApiItem<any, any>>(group: string, version: 
         get: (name: string, cb: StreamCallback<T>, errCb?: ErrorCallback) => streamResult(url, name, cb, errCb),
         post: (body: any) => post(url, body),
         put: (body: any) => put(`${url}/${body.metadata.name}`, body),
+        patch: (body: any) => patch(`${url}/${body.metadata.name}`, body),
         delete: (name: string) => remove(`${url}/${name}`),
     };
 }
@@ -101,6 +103,7 @@ export function apiFactoryWithNamespace<T extends ApiItem<any, any>>(group: stri
         get: (namespace: string, name: string, cb: StreamCallback<T>, errCb?: ErrorCallback) => streamResult(url(namespace), name, cb, errCb),
         post: (body: any) => post(url(body.metadata.namespace), body),
         put: (body: any) => put(`${url(body.metadata.namespace)}/${body.metadata.name}`, body),
+        patch: (body: any) => patch(`${url(body.metadata.namespace)}/${body.metadata.name}`, body),
         delete: (namespace: string, name: string) => remove(`${url(namespace)}/${name}`),
         scale: includeScale ? apiScaleFactory(apiRoot, resource) : undefined,
     };
@@ -134,6 +137,12 @@ export function post(url: string, json: any, autoLogoutOnAuthError = true) {
 export function put(url: string, json: any, autoLogoutOnAuthError = true) {
     const body = JSON.stringify(json);
     const opts = {method: 'PUT', body, headers: JSON_HEADERS};
+    return request(url, opts, autoLogoutOnAuthError);
+}
+
+export function patch(url: string, json: any, autoLogoutOnAuthError = true) {
+    const body = JSON.stringify(json);
+    const opts = {method: 'PATCH', body, headers: JSONPATCH_HEADERS};
     return request(url, opts, autoLogoutOnAuthError);
 }
 

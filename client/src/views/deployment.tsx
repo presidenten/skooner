@@ -2,6 +2,7 @@ import React from 'react';
 import Base from '../components/base';
 import ContainersPanel from '../components/containersPanel';
 import PodCpuChart from '../components/podCpuChart';
+import RestartButton from '../components/restartButton';
 import EventsPanel from '../components/eventsPanel';
 import ItemHeader from '../components/itemHeader';
 import Loading from '../components/loading';
@@ -79,6 +80,23 @@ export default class DeploymentView extends Base<Props, State> {
             <div id='content'>
                 <ItemHeader title={['Deployment', namespace, name]} ready={!!item}>
                     <>
+                        <RestartButton
+                            onRestart={() => service.patch({
+                                metadata: {
+                                    namespace,
+                                    name,
+                                },
+                                spec: {
+                                    template: {
+                                        metadata: {
+                                            annotations: {
+                                                'kubectl.kubernetes.io/restartedAt': new Date().toISOString(),
+                                            },
+                                        },
+                                    },
+                                },
+                            })}
+                        />
                     </>
                 </ItemHeader>
 

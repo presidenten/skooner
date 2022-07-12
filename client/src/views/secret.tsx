@@ -6,8 +6,6 @@ import Loading from '../components/loading';
 import Field from '../components/field';
 import MetadataFields from '../components/metadataFields';
 import SecretValue from '../components/secretValue';
-import SaveButton from '../components/saveButton';
-import DeleteButton from '../components/deleteButton';
 import {Secret} from '../utils/types';
 
 type Props = {
@@ -38,14 +36,6 @@ export default class SecretView extends Base<Props, State> {
             <div id='content'>
                 <ItemHeader title={['Secret', namespace, name]} ready={!!item}>
                     <>
-                        <SaveButton
-                            item={item}
-                            onSave={x => service.put(x)}
-                        />
-
-                        <DeleteButton
-                            onDelete={() => service.delete(namespace, name)}
-                        />
                     </>
                 </ItemHeader>
 

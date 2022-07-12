@@ -2,7 +2,6 @@ import React from 'react';
 import Base from '../components/base';
 import ContainersPanel from '../components/containersPanel';
 import PodCpuChart from '../components/podCpuChart';
-import DeleteButton from '../components/deleteButton';
 import EventsPanel from '../components/eventsPanel';
 import Field from '../components/field';
 import ItemHeader from '../components/itemHeader';
@@ -10,7 +9,6 @@ import Loading from '../components/loading';
 import MetadataFields from '../components/metadataFields';
 import PodsPanel from '../components/podsPanel';
 import PodRamChart from '../components/podRamChart';
-import SaveButton from '../components/saveButton';
 import api from '../services/api';
 import getMetrics from '../utils/metricsHelpers';
 import {filterByOwner} from '../utils/filterHelper';
@@ -63,14 +61,6 @@ export default class CronJobView extends Base<Props, State> {
             <div id='content'>
                 <ItemHeader title={['Cron Job', namespace, name]} ready={!!item}>
                     <>
-                        <SaveButton
-                            item={item}
-                            onSave={x => service.put(x)}
-                        />
-
-                        <DeleteButton
-                            onDelete={() => service.delete(namespace, name)}
-                        />
                     </>
                 </ItemHeader>
 

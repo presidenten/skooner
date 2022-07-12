@@ -5,8 +5,6 @@ import ItemHeader from '../components/itemHeader';
 import Loading from '../components/loading';
 import Field from '../components/field';
 import MetadataFields from '../components/metadataFields';
-import SaveButton from '../components/saveButton';
-import DeleteButton from '../components/deleteButton';
 import {PersistentVolumeClaim} from '../utils/types';
 
 type State = {
@@ -37,14 +35,6 @@ export default class PersistentVolumeClaimView extends Base<Props, State> {
             <div id='content'>
                 <ItemHeader title={['Volume Claim', namespace, name]} ready={!!item}>
                     <>
-                        <SaveButton
-                            item={item!}
-                            onSave={x => service.put(x)}
-                        />
-
-                        <DeleteButton
-                            onDelete={() => service.delete(namespace, name)}
-                        />
                     </>
                 </ItemHeader>
 

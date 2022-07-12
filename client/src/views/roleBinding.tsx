@@ -6,8 +6,6 @@ import Loading from '../components/loading';
 import Field from '../components/field';
 import MetadataFields from '../components/metadataFields';
 import {TableBody} from '../components/listViewHelpers';
-import SaveButton from '../components/saveButton';
-import DeleteButton from '../components/deleteButton';
 import Sorter, {defaultSortInfo, SortInfo} from '../components/sorter';
 import ResourceSvg from '../art/resourceSvg';
 import {RoleBinding, RoleBindingSubject} from '../utils/types';
@@ -46,14 +44,6 @@ export default class RoleBindingView extends Base<Props, State> {
             <div id='content'>
                 <ItemHeader title={['Role Binding', namespace, name]} ready={!!item}>
                     <>
-                        <SaveButton
-                            item={item}
-                            onSave={x => service.put(x)}
-                        />
-
-                        <DeleteButton
-                            onDelete={() => service.delete(namespace, name)}
-                        />
                     </>
                 </ItemHeader>
 

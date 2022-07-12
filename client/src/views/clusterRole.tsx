@@ -6,8 +6,6 @@ import ItemHeader from '../components/itemHeader';
 import Loading from '../components/loading';
 import MetadataFields from '../components/metadataFields';
 import {TableBody} from '../components/listViewHelpers';
-import SaveButton from '../components/saveButton';
-import DeleteButton from '../components/deleteButton';
 import {ClusterRole} from '../utils/types';
 
 type Props = {
@@ -38,14 +36,6 @@ export default class ClusterRoleView extends Base<Props, State> {
             <div id='content'>
                 <ItemHeader title={['Cluster Role', name]} ready={!!item}>
                     <>
-                        <SaveButton
-                            item={item!}
-                            onSave={x => service.put(x)}
-                        />
-
-                        <DeleteButton
-                            onDelete={() => service.delete(name)}
-                        />
                     </>
                 </ItemHeader>
 

@@ -5,9 +5,6 @@ import Loading from '../components/loading';
 import MetadataFields from '../components/metadataFields';
 import PodsPanel from '../components/podsPanel';
 import api from '../services/api';
-import ScaleButton from '../components/scaleButton';
-import SaveButton from '../components/saveButton';
-import DeleteButton from '../components/deleteButton';
 import EventsPanel from '../components/eventsPanel';
 import PodRamChart from '../components/podRamChart';
 import PodCpuChart from '../components/podCpuChart';
@@ -64,20 +61,6 @@ export default class StatefulSet extends Base<Props, State> {
             <div id='content'>
                 <ItemHeader title={['Stateful Set', namespace, name]} ready={!!item}>
                     <>
-                        <ScaleButton
-                            namespace={namespace}
-                            name={name}
-                            scaleApi={service.scale}
-                        />
-
-                        <SaveButton
-                            item={item}
-                            onSave={x => service.put(x)}
-                        />
-
-                        <DeleteButton
-                            onDelete={() => service.delete(namespace, name)}
-                        />
                     </>
                 </ItemHeader>
 

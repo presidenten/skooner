@@ -2,7 +2,6 @@ import React from 'react';
 import Base from '../components/base';
 import ContainersPanel from '../components/containersPanel';
 import PodCpuChart from '../components/podCpuChart';
-import DeleteButton from '../components/deleteButton';
 import EventsPanel from '../components/eventsPanel';
 import ItemHeader from '../components/itemHeader';
 import Loading from '../components/loading';
@@ -10,8 +9,6 @@ import MetadataFields from '../components/metadataFields';
 import PodsPanel from '../components/podsPanel';
 import PodRamChart from '../components/podRamChart';
 import ReplicaSetsPanel from '../components/replicaSetsPanel';
-import SaveButton from '../components/saveButton';
-import ScaleButton from '../components/scaleButton';
 import api from '../services/api';
 import {filterByOwner, filterByOwners} from '../utils/filterHelper';
 import getMetrics from '../utils/metricsHelpers';
@@ -83,20 +80,6 @@ export default class DeploymentView extends Base<Props, State> {
             <div id='content'>
                 <ItemHeader title={['Deployment', namespace, name]} ready={!!item}>
                     <>
-                        <ScaleButton
-                            namespace={namespace}
-                            name={name}
-                            scaleApi={service.scale}
-                        />
-
-                        <SaveButton
-                            item={item}
-                            onSave={x => service.put(x)}
-                        />
-
-                        <DeleteButton
-                            onDelete={() => service.delete(namespace, name)}
-                        />
                     </>
                 </ItemHeader>
 

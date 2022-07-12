@@ -4,8 +4,6 @@ import ItemHeader from '../components/itemHeader';
 import Loading from '../components/loading';
 import MetadataFields from '../components/metadataFields';
 import api from '../services/api';
-import SaveButton from '../components/saveButton';
-import DeleteButton from '../components/deleteButton';
 import EventsPanel from '../components/eventsPanel';
 import PodsPanel from '../components/podsPanel';
 import Chart from '../components/chart';
@@ -64,14 +62,6 @@ export default class DaemonSetView extends Base<Props, State> {
             <div id='content'>
                 <ItemHeader title={['Daemon Set', namespace, name]} ready={!!item}>
                     <>
-                        <SaveButton
-                            item={item}
-                            onSave={x => service.put(x)}
-                        />
-
-                        <DeleteButton
-                            onDelete={() => service.delete(namespace, name)}
-                        />
                     </>
                 </ItemHeader>
 

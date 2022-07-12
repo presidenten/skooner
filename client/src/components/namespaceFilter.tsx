@@ -38,7 +38,29 @@ export default class NamespaceFilter extends Base<NamespaceFilterProps, Namespac
         const {namespace = '', namespaces = []} = this.state;
 
         const options = namespaces.map(x => ({value: x.metadata.name, label: x.metadata.name}));
-        options.unshift({value: '', label: 'All Namespaces'});
+        // options.unshift({value: '', label: 'All Namespaces'});
+
+        const namespacesToSkip = [
+            'argo-events',
+            'argo-rollouts',
+            'argo-workflows',
+            'argocd',
+            'calico-system',
+            'cassandra',
+            'cert-manager',
+            'emissary',
+            'emissary-system',
+            'kube-node-lease',
+            'kube-public',
+            'kube-system',
+            'tigera-operator',
+            'default',
+        ];
+
+        const filteredOptions = [
+            ...options.filter(ns => !namespacesToSkip.includes(ns.label)),
+            {value: 'default', label: 'Default'},
+        ];
 
         const value = options.find(x => x.value === namespace);
 
@@ -49,7 +71,7 @@ export default class NamespaceFilter extends Base<NamespaceFilterProps, Namespac
                     classNamePrefix="react-select"
                     value={value}
                     onChange={(x:ValueType<TODO>) => this.setNamespace(x.value)}
-                    options={options}
+                    options={filteredOptions}
                 />
             </div>
         );

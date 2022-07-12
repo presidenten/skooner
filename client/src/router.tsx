@@ -57,28 +57,12 @@ let handler: Handler;
 
 registerRoute('', () => <Dashboard />);
 registerRoute('account', () => <Account />);
-// @ts-ignore
-registerRoute('clusterrole/:name', params => <ClusterRole {...params} />);
-// @ts-ignore
-registerRoute('clusterrolebinding/:name', params => <ClusterRoleBinding {...params} />);
-registerRoute('configmap', () => <ConfigMaps />);
-// @ts-ignore
-registerRoute('configmap/:namespace/:name', params => <ConfigMap {...params} />);
-registerRoute('ingress', () => <Ingresses />);
-// @ts-ignore
-registerRoute('ingress/:namespace/:name', params => <Ingress {...params} />);
 registerRoute('namespace', () => <Namespaces />);
 // @ts-ignore
 registerRoute('namespace/:namespace', params => <Namespace {...params} />);
 registerRoute('node', () => <Nodes />);
 // @ts-ignore
 registerRoute('node/:name', params => <Node {...params} />);
-registerRoute('persistentvolume', () => <PersistentVolumes />);
-// @ts-ignore
-registerRoute('persistentvolume/:name', params => <PersistentVolume {...params} />);
-registerRoute('persistentvolumeclaim', () => <PersistentVolumeClaims />);
-// @ts-ignore
-registerRoute('persistentvolumeclaim/:namespace/:name', params => <PersistentVolumeClaim {...params} />);
 registerRoute('pod', () => <Pods />);
 // @ts-ignore
 registerRoute('pod/:namespace/:name', params => <Pod {...params} />);
@@ -86,27 +70,6 @@ registerRoute('pod/:namespace/:name', params => <Pod {...params} />);
 registerRoute('pod/:namespace/:name/exec', params => <Exec {...params} />);
 // @ts-ignore
 registerRoute('pod/:namespace/:name/logs', params => <Logs {...params} />);
-registerRoute('replicaset', () => <ReplicaSets />);
-// @ts-ignore
-registerRoute('replicaset/:namespace/:name', params => <ReplicaSet {...params} />);
-registerRoute('role', () => <Roles />);
-// @ts-ignore
-registerRoute('role/:namespace/:name', params => <Role {...params} />);
-registerRoute('rolebinding', () => <RoleBindings />);
-// @ts-ignore
-registerRoute('rolebinding/:namespace/:name', params => <RoleBinding {...params} />);
-registerRoute('secret', () => <Secrets />);
-// @ts-ignore
-registerRoute('secret/:namespace/:name', params => <Secret {...params} />);
-registerRoute('service', () => <Services />);
-// @ts-ignore
-registerRoute('service/:namespace/:name', params => <Service {...params} />);
-registerRoute('serviceaccount', () => <ServiceAccounts />);
-// @ts-ignore
-registerRoute('serviceaccount/:namespace/:name', params => <ServiceAccount {...params} />);
-registerRoute('storageclass', () => <StorageClasses />);
-// @ts-ignore
-registerRoute('storageclass/:name', params => <StorageClass {...params} />);
 registerRoute('workload', () => <Workloads />);
 // @ts-ignore
 registerRoute('workload/cronjob/:namespace/:name', params => <CronJob {...params} />);

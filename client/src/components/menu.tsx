@@ -51,25 +51,12 @@ export default class Menu extends Base<MenuProps, MenuStates> {
 
                 <div id='menu' className={toggled ? 'menu_toggled' : undefined}>
 
-                    {/* Cluster */}
-                    <Group>
-                        <MenuItem title='Cluster' path='' resource='Logo' onClick={onClick} />
-
-                        {canView(rules, api.node) && (
-                            <MenuItem title='Nodes' path='node' resource='Node' onClick={onClick} />
-                        )}
-
-                        {canView(rules, api.namespace) && (
-                            <MenuItem title='Namespaces' path='namespace' resource='Namespace' onClick={onClick} />
-                        )}
-                    </Group>
-
                     {/* Workloads */}
                     <Group>
                         {canView(rules, api.deployment) && (
                             <MenuItem title='Workloads' path='workload' resource='Deployment' onClick={onClick} />
                         )}
-
+{/*
                         {canView(rules, api.service) && (
                             <MenuItem title='Services' path='service' resource='Service' onClick={onClick} />
                         )}
@@ -77,11 +64,12 @@ export default class Menu extends Base<MenuProps, MenuStates> {
                         {canView(rules, api.replicaSet) && (
                             <MenuItem title='Replicas' path='replicaset' resource='ReplicaSet' onClick={onClick} />
                         )}
+*/}
 
                         {canView(rules, api.pod) && (
                             <MenuItem title='Pods' path='pod' resource='Pod' onClick={onClick} />
                         )}
-
+{/*
                         {canView(rules, api.ingress) && (
                             <MenuItem title='Ingresses' path='ingress' resource='Ingress' onClick={onClick} />
                         )}
@@ -89,9 +77,26 @@ export default class Menu extends Base<MenuProps, MenuStates> {
                         {canView(rules, api.configMap) && (
                             <MenuItem title='Config' path='configmap' resource='ConfigMap' onClick={onClick} />
                         )}
+*/}
+                    </Group>
+
+
+                    {/* Cluster */}
+                    <Group>
+                        <MenuItem title='Cluster' path='' resource='Logo' onClick={onClick} />
+
+                        {canView(rules, api.node) && (
+                            <MenuItem title='Nodes' path='node' resource='Node' onClick={onClick} />
+                        )}
+{/*
+                        {canView(rules, api.namespace) && (
+                            <MenuItem title='Namespaces' path='namespace' resource='Namespace' onClick={onClick} />
+                        )}
+*/}
                     </Group>
 
                     {/* Storage */}
+{/*
                     <Group>
                         {canView(rules, api.storageClass) && (
                             <MenuItem title='Storage' path='storageclass' resource='StorageClass' onClick={onClick} />
@@ -105,8 +110,10 @@ export default class Menu extends Base<MenuProps, MenuStates> {
                             <MenuItem title='Claims' path='persistentvolumeclaim' resource='PersistentVolumeClaim' onClick={onClick} />
                         )}
                     </Group>
+*/}
 
                     {/* Security */}
+{/*
                     <Group>
                         {canView(rules, api.serviceAccount) && (
                             <MenuItem title='Accounts' path='serviceaccount' resource='ServiceAccount' onClick={onClick} />
@@ -137,6 +144,7 @@ export default class Menu extends Base<MenuProps, MenuStates> {
                             </button>
                         </div>
                     </Group>
+*/}
 
                     {showAdd && (
                         <EditorModal

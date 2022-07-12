@@ -8,7 +8,6 @@ import Loading from '../components/loading';
 import MetadataFields from '../components/metadataFields';
 import PodsPanel from '../components/podsPanel';
 import PodRamChart from '../components/podRamChart';
-import ReplicaSetsPanel from '../components/replicaSetsPanel';
 import api from '../services/api';
 import {filterByOwner, filterByOwners} from '../utils/filterHelper';
 import getMetrics from '../utils/metricsHelpers';
@@ -100,13 +99,6 @@ export default class DeploymentView extends Base<Props, State> {
                 <ContainersPanel spec={item && item.spec.template.spec} />
 
                 <HpaPanel spec={hpa && hpa.spec}/>
-
-                <div className='contentPanel_header'>Replica Sets</div>
-                <ReplicaSetsPanel
-                    items={filteredReplicaSets}
-                    sort={replicaSetsSort}
-                    includeNamespace={false}
-                />
 
                 <div className='contentPanel_header'>Pods</div>
                 <PodsPanel

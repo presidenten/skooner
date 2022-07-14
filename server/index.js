@@ -6,6 +6,7 @@ const k8s = require('@kubernetes/client-node');
 const {createProxyMiddleware} = require('http-proxy-middleware');
 const toString = require('stream-to-string');
 const {Issuer} = require('openid-client');
+const fs = require('fs');
 
 const NODE_ENV = process.env.NODE_ENV;
 const DEBUG_VERBOSE = !!process.env.DEBUG_VERBOSE;
@@ -25,6 +26,8 @@ kc.loadFromDefault();
 
 const opts = {};
 kc.applyToRequest(opts);
+
+const k8sToken = fs.readFileSync('/run/secrets/kubernetes.io/serviceaccount/token').toString();
 
 const target = kc.getCurrentCluster().server;
 console.log('API URL: ', target);
@@ -50,12 +53,18 @@ if (NODE_ENV !== 'production') app.use(cors());
 app.use('/', preAuth, express.static('public'));
 app.get('/oidc', getOidc);
 app.post('/oidc', postOidc);
-app.use('/*', createProxyMiddleware(proxySettings));
+app.use('/*', [setServiceAccountAuth, createProxyMiddleware(proxySettings)]);
 app.use(handleErrors);
 
 const port = process.env.SERVER_PORT || 4654;
 http.createServer(app).listen(port);
 console.log(`Server started. Listening on port ${port}`);
+
+
+function setServiceAccountAuth(req, res, next) {
+    req.headers.authorization = 'Bearer ' + k8sToken;
+    next();
+}
 
 function preAuth(req, res, next) {
     const auth = req.header('Authorization');
